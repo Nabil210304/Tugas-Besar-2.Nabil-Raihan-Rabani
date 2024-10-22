@@ -1,3 +1,4 @@
+/* Existing CSS */
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +20,7 @@ body {
 }
 
 .sidebar h2 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -58,6 +60,12 @@ header h1 {
     color: #333;
 }
 
+header p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+}
+
 /* Stats Cards */
 .cards {
     display: flex;
@@ -69,9 +77,9 @@ header h1 {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 4px 6px rgba(0, 0, 0, 0.1);
-    width: 23%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 23%;
 }
 
 .card h3 {
@@ -85,11 +93,132 @@ header h1 {
     color: #27ae60;
 }
 
-/* Chart */
-#chart {
+/* Add Product */
+.card-button {
+    background-color: #007bff; /* Warna dasar tombol */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px; /* Sudut melengkung */
+    cursor: pointer;
+}
+
+.card-button a {
+    text-decoration: none;
+    color: white;
+}
+
+.card-button:hover {
+    background-color: #0056b3; /* Warna tombol saat hover */
+    transform: scale(1.05); /* Sedikit membesar saat di hover */
+}
+
+/* Product Grid */
+.product-grid {
+    display: flex;
+    justify-content: center; /* Produk ditampilkan di tengah */
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Product Card */
+.product-card {
     background-color: white;
     padding: 20px;
+    width: 250px; /* Lebar tetap */
+    height: 450px; /* Tinggi tetap, sesuaikan dengan kebutuhan */
     border-radius: 10px;
-    box-shadow: 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease; /* Animasi hover */
+}
+
+.product-card img {
+    width: 100%;
+    height: 225px; /* Tetapkan tinggi gambar agar seragam */
+    object-fit: cover; /* Menyesuaikan gambar agar sesuai dengan frame tanpa mengubah proporsi */
+    border-radius: 5px;
+}
+
+.product-card:hover {
+    transform: translateY(-10px); /* Efek naik ke atas saat hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Bayangan lebih besar saat hover */
+}
+
+.product-card h3 {
+    margin: 15px 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.product-card .price {
+    font-size: 18px;
+    color: #27ae60;
+    margin-bottom: 10px;
+}
+
+.product-card .description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+/* Tombol Keranjang dengan Animasi */
+.add-to-cart,
+.cancel-to-cart {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px; /* Jarak antar tombol */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transisi untuk animasi hover */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Remove default link styles for buttons */
+.add-to-cart:visited,
+.add-to-cart:active,
+.cancel-to-cart:visited,
+.cancel-to-cart:active {
+    color: white; /* Change to your desired color */
+    text-decoration: none; /* Ensure no underline */
+}
+
+.add-to-cart:hover,
+.cancel-to-cart:hover {
+    background-color: #2980b9;
+    transform: scale(1.05); /* Efek zoom saat di-hover */
+}
+
+/* Tombol Cancel dengan Animasi */
+.cancel-to-cart {
+    background-color: #e74c3c;
+}
+
+.cancel-to-cart:hover {
+    background-color: #c0392b;
+    transform: scale(1.05); /* Efek zoom saat di-hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    padding: 10px 0;
+    margin-top: 20px; /* Jarak atas footer dari konten sebelumnya */
+    width: 100%; /* Mengambil lebar penuh */
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    .product-grid {
+        justify-content: center;
+    }
 }
