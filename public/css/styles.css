@@ -125,6 +125,7 @@ header p {
 }
 
 /* Product Card */
+/* Menyesuaikan ukuran card dan mengatasi deskripsi yang terlalu panjang */
 .product-card {
     background-color: white;
     padding: 20px;
@@ -134,6 +135,16 @@ header p {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.3s ease; /* Animasi hover */
+}
+
+.product-card .description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+    height: 40px; /* Tinggi tetap untuk deskripsi */
+    overflow: hidden; /* Menyembunyikan teks yang berlebih */
+    white-space: nowrap; /* Tidak memotong teks ke baris baru */
+    text-overflow: ellipsis; /* Menampilkan "..." jika teks terlalu panjang */
 }
 
 .product-card img {
