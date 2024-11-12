@@ -20,6 +20,7 @@ class Produk extends Model
         'jumlah_produk',
         'image',
         'created_at',
-        'updated_at' // Corrected the property name to 'updated_at'
+        'updated_at', // Corrected the property name to 'updated_at'
+        'user_id'
     ];
 }

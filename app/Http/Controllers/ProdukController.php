@@ -5,18 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function ViewProduk()
+        public function ViewProduk()
     {
-        $produk = Produk::all(); //mengambil data di tabel prduk
-        return view('produk',['produk'=> $produk]);
+        // Mengambil semua data di tabel produk
+        $isAdmin = Auth::user()->role == "admin";
+
+        // Jika user adalah admin, tampilkan semua data; jika bukan, tampilkan data dengan user_id yang sama dengan user yang login
+        $produk = $isAdmin ? Produk::all() : Produk::where("user_id", Auth::user()->id)->get();
+
+        return view('produk', compact('produk'));
     }
+
+
     public function CreateProduk(Request $request)
     {
         // Menambahkan variabel $filePath untuk mendefinisikan penyimpanan file
@@ -33,10 +44,11 @@ class ProdukController extends Controller
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga, // Add the harga field
             'jumlah_produk' => $request->jumlah_produk,
-            'image' => $imageName
+            'image' => $imageName,
+            'user_id' => Auth::user()->id
         ]);
 
-        return redirect('/produk');
+        return redirect(Auth::user()->role.'/produk');
     }
     public function ViewAddProduk()
     {
@@ -61,6 +73,27 @@ class ProdukController extends Controller
     // Tampilkan view edit dengan data produk
     return view('editproduk', compact('produk'));
     }
+
+    public function ViewLaporan()
+    {
+        //mengambil semua data produk
+        $products = Produk::all();
+        return view('laporan', ['products' => $products]);
+    }
+
+    public function print()
+    {
+        // Mengambil semua data produk
+        $products = Produk::all();
+
+        // Load view untuk PDF dengan data produk
+        $pdf = Pdf::loadView('report', compact('products'));
+
+        // Menampilkan PDF langsung di browser
+        return $pdf->stream('laporan-produk.pdfr');
+    }
+
+
     public function UpdateProduk(Request $request, $kode_produk)
     {
         // Menambahkan variabel $filePath untuk mendefinisikan penyimpanan file
